@@ -1,1 +1,1 @@
-financial_management是项目名称，实验报告在里面
+financial_management是项目
