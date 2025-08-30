@@ -379,7 +379,7 @@ void record_manager::checkbalance()
 	int netincome = totalincome - totalspend;
 	cout << "total income:" << totalincome << endl;
 	cout << "total spend:" << totalspend << endl;
-	cout << "net banlance:" << (netincome >= 0 ? "+" : "") << netincome << endl;
+	cout << "net balance:" << (netincome >= 0 ? "+" : "") << netincome << endl;
 	cout <<"target:" << target << endl;
 	balancewarning();
 }
