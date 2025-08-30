@@ -16,7 +16,7 @@ int main() {
     
     do {
         showmenu();
-        choice = getInput<int>(0, 11);
+        choice = getInput<int>(0, 12);
         menu(choice, manager);
         
         if (choice != 0) {

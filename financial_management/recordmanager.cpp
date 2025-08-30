@@ -20,7 +20,10 @@ void record_manager::addrecord(record* rd)
 
 void record_manager::showallrecords()
 {
-
+	if (getsize() == 0) {
+		cout << "no records" << endl;
+		return;
+	}
 	cout << setw(12) << "type"
 		<< setw(13) << "money"
 		<< setw(16) << "date"
@@ -42,7 +45,11 @@ void record_manager::loadfromfile() {
 		cerr << "can not open file" << endl;
 		return;
 	}
-
+	if (!(in >> target)) {
+		target = 10000;
+		cerr << "Warning: Failed to read target. Using default: " << target << endl;
+	}
+	in.ignore(); 
 	int type;
 	while (in >> type) {
 		record* rd = nullptr;
@@ -70,6 +77,7 @@ void record_manager::loadfromfile() {
 void record_manager::savetofile()
 {
 	ofstream out(filename);
+	out << target << endl;
 	for (int i = 0; i < getsize(); i++) {
 		records[i]->save(out);
 	}
@@ -118,6 +126,9 @@ void record_manager::viewincomerecords(date dt1, date dt2)
 			}
 		}
 	}
+	if (count == 1) {
+		cout << "No income_ records found in the specified date range." << endl;
+	}
 }
 
 void record_manager::viewspendrecords(date dt1, date dt2)
@@ -162,6 +173,9 @@ void record_manager::viewspendrecords(date dt1, date dt2)
 			}
 		}
 	}
+	if (count == 1) {
+		cout << "No spend_ records found in the specified date range." << endl;
+	}
 }
 
 void record_manager::searchbydate(int y, int m, int d)
@@ -179,6 +193,9 @@ void record_manager::searchbydate(int y, int m, int d)
 			cout << setw(4) << count++;
 			records[i]->showrecord();
 		}
+	}
+	if (count == 1) {
+		cout << "No records found in the specified date." << endl;
 	}
 }
 
@@ -231,7 +248,7 @@ void record_manager::modifybydate(int y, int m, int d)
 	// 修改金额
 	cout << "Current money: " << selectedRecord->getmoney() << endl;
 	cout << "Enter new money (0 to keep current): ";
-	int newMoney = getInput<int>(0, 1000000); 
+	int newMoney = getInput<int>(0); 
 	if (newMoney > 0) {
 		selectedRecord->setmoney(newMoney);
 	}
@@ -285,13 +302,67 @@ void record_manager::modifybydate(int y, int m, int d)
 
 void record_manager::deletebydate(int y, int m, int d)
 {
-	for (int i = getsize() - 1; i > -1; i--) {
-		if (records[i]->getdate().getyear() == y && records[i]->getdate().getmonth() == m && records[i]->getdate().getday() == d) {
-			delete records[i];
-			records.erase(records.begin() + i);
+	vector<record*> recordsToDelete;
+	vector<int> indices; // 保存原始索引
+
+	// 查找匹配的记录并记录原始索引
+	for (int i = 0; i < getsize(); i++) {
+		if (records[i]->getdate().getyear() == y &&
+			records[i]->getdate().getmonth() == m &&
+			records[i]->getdate().getday() == d) {
+			recordsToDelete.push_back(records[i]);
+			indices.push_back(i);
 		}
 	}
-	cout << "deleted" << endl;
+
+	if (recordsToDelete.empty()) {
+		cout << "No records found for date " << y << "/" << m << "/" << d << endl;
+		return;
+	}
+
+	// 显示找到的记录
+	cout << "Found " << recordsToDelete.size() << " records for date " << y << "/" << m << "/" << d << ":" << endl;
+	cout << setw(12) << "type"
+		<< setw(13) << "money"
+		<< setw(16) << "date"
+		<< setw(14) << "category"
+		<< setw(9) << "    To/From:"
+		<< endl;
+
+	for (int i = 0; i < recordsToDelete.size(); i++) {
+		cout << setw(4) << i + 1;
+		recordsToDelete[i]->showrecord();
+	}
+
+	// 选择删除方式
+	cout << "\nEnter record number to delete (1-" << recordsToDelete.size() << ")" << endl;
+	cout << "Or enter -1 to delete ALL records for this date" << endl;
+	cout << "Or enter 0 to cancel: ";
+
+	int choice = getInput<int>(-1, recordsToDelete.size());
+
+	if (choice == 0) {
+		cout << "Deletion cancelled." << endl;
+		return;
+	}
+
+	if (choice == -1) {
+		// 删除该日期的所有记录（从后往前删除避免索引变化）
+		for (int i = indices.size() - 1; i >= 0; i--) {
+			delete records[indices[i]];
+			records.erase(records.begin() + indices[i]);
+		}
+		cout << "All " << recordsToDelete.size() << " records deleted successfully!" << endl;
+	}
+	else {
+		// 删除单个记录
+		int selectedIndex = indices[choice - 1];
+		delete records[selectedIndex];
+		records.erase(records.begin() + selectedIndex);
+		cout << "Record deleted successfully!" << endl;
+	}
+
+	savetofile(); // 保存到文件
 }
 
 
@@ -308,7 +379,9 @@ void record_manager::checkbalance()
 	int netincome = totalincome - totalspend;
 	cout << "total income:" << totalincome << endl;
 	cout << "total spend:" << totalspend << endl;
-	cout << "net banlance:" << (netincome >= 0 ? "+" : "-") << netincome << endl;
+	cout << "net banlance:" << (netincome >= 0 ? "+" : "") << netincome << endl;
+	cout <<"target:" << target << endl;
+	balancewarning();
 }
 
 void record_manager::statisticsbyCategory(date dt1, date dt2)
@@ -381,11 +454,43 @@ int record_manager::getsize()
 	return records.size();
 }
 
+void record_manager::balancewarning()
+{
+	int totalincome = 0;
+	int totalspend = 0;
+	for (int i = 0; i < getsize(); i++) {
+		if (records[i]->isIncome())
+			totalincome += records[i]->getmoney();
+		else
+			totalspend += records[i]->getmoney();
+	}
+	int netincome = totalincome - totalspend;
+	if(netincome<0)
+		cout << "Warning: You are overspending! (Net: " << netincome << "￥)" << endl;
+	if (netincome >= target) {
+		cout << "Congratulations! You've reached your financial goal: " << target << "￥!" << endl;
+	}
+	else {
+		cout << "Goal: " << target << "￥, Need: " << (target - netincome) << "￥ more." << endl;
+	}
+}
+
+int record_manager::gettarget()
+{
+	return target;
+}
+
+void record_manager::settarget(int et)
+{
+	target = et;
+}
+
+
 int record_manager::get_sorttype() const { return sorttype; }
 
 void record_manager::set_sorttype(int st) { sorttype = st; }
 
-record_manager::record_manager() :sorttype(0)
+record_manager::record_manager() :sorttype(0),target(10000)
 {
 	loadfromfile();
 }

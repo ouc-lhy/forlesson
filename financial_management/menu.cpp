@@ -83,9 +83,10 @@ void showmenu() {
     cout << "9 - Statistics by Category within Date Range" << endl;
     cout << "10 - showallrecords" << endl;
     cout << "11 - set sort type" << endl;
+    cout << "12 - set expect target" << endl;
     cout << "0 - Exit System" << endl;
     cout << "================================================" << endl;
-    cout << "Please select operation (0-11): ";
+    cout << "Please select operation (0-12): ";
 }
 
 void menu(int choice, record_manager& manager) {
@@ -105,6 +106,7 @@ void menu(int choice, record_manager& manager) {
 
             income_record* ird = new income_record(dt, money, it, who);
             manager.addrecord(ird);
+            manager.balancewarning();
             manager.savetofile();
             break;
         }
@@ -124,6 +126,7 @@ void menu(int choice, record_manager& manager) {
             
             spend_record* srd = new spend_record(dt, money, who, st);
             manager.addrecord(srd);
+            manager.balancewarning();
             manager.savetofile(); 
             break;
         }
@@ -157,13 +160,14 @@ void menu(int choice, record_manager& manager) {
             cout << "Modify Record by Date" << endl;
             date targetDate = inputdate();
             manager.modifybydate(targetDate.getyear(), targetDate.getmonth(), targetDate.getday());
-
+            manager.balancewarning();
             break;
         }
 
         case 8: {
             date dt = inputdate();
             manager.deletebydate(dt.getyear(), dt.getmonth(), dt.getday());
+            manager.balancewarning();
             manager.savetofile(); 
             break;
         }
@@ -186,14 +190,23 @@ void menu(int choice, record_manager& manager) {
             manager.set_sorttype(sorttype);
             break;
         }
-        
+        case 12: {
+            cout << "please enter the expect target you want to set" << endl;
+            cout << "expect target:";
+            int newtarget;
+            newtarget=getInput<int>(0);
+            manager.settarget(newtarget);
+            manager.balancewarning();
+            manager.savetofile();
+            break;
+        }
         case 0: {
             cout << "\nThank you for using Personal Finance Management System. Goodbye!" << endl;
             break;
         }
 
         default: {
-            cout << "\nInvalid input, please select again (0-11)!" << endl;
+            cout << "\nInvalid input, please select again (0-12)!" << endl;
             break;
         }
     }

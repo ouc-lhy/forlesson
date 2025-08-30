@@ -11,6 +11,7 @@ class record_manager {
 private:
     vector<record*> records;
     int sorttype;
+    int target;
 public:
     
     void addrecord(record* rd);
@@ -25,6 +26,9 @@ public:
     void checkbalance();
     void statisticsbyCategory(date dt1, date dt2);
     int getsize();
+    void balancewarning();
+    int gettarget();
+    void settarget(int et);
     int get_sorttype() const;
     void set_sorttype(int st);
     void sort_records();
