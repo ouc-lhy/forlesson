@@ -370,15 +370,15 @@ void record_manager::deletebydate(int y, int m, int d)
 
 void record_manager::checkbalance()
 {
-	int totalincome = 0;
-	int totalspend = 0;
+	float totalincome = 0;
+	float totalspend = 0;
 	for (int i = 0; i < getsize(); i++) {
 		if (records[i]->isIncome())
 			totalincome += records[i]->getmoney();
 		else
 			totalspend += records[i]->getmoney();
 	}
-	int netincome = totalincome - totalspend;
+	float netincome = totalincome - totalspend;
 	cout << "total income:" << totalincome << endl;
 	cout << "total spend:" << totalspend << endl;
 	cout << "net balance:" << (netincome >= 0 ? "+" : "") << netincome << endl;
@@ -388,10 +388,10 @@ void record_manager::checkbalance()
 
 void record_manager::statisticsbyCategory(date dt1, date dt2)
 {
-	int incomeAmount[6] = { 0 };
+	float incomeAmount[6] = { 0 };
 	int incomeCount[6] = { 0 };
 
-	int spendAmount[11] = { 0 };
+	float spendAmount[11] = { 0 };
 	int spendCount[11] = { 0 };
 
 	for (int i = 0; i < getsize(); i++) {
@@ -458,15 +458,15 @@ int record_manager::getsize()
 
 void record_manager::balancewarning()
 {
-	int totalincome = 0;
-	int totalspend = 0;
+	float totalincome = 0;
+	float totalspend = 0;
 	for (int i = 0; i < getsize(); i++) {
 		if (records[i]->isIncome())
 			totalincome += records[i]->getmoney();
 		else
 			totalspend += records[i]->getmoney();
 	}
-	int netincome = totalincome - totalspend;
+	float netincome = totalincome - totalspend;
 	if(netincome<0)
 		cout << "Warning: You are overspending! (Net: " << netincome << "гд)" << endl;
 	if (netincome >= target) {
