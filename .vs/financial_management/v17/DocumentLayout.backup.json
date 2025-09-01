@@ -104,8 +104,7 @@
               "RelativeToolTip": "financial_management\\menu.h",
               "ViewState": "AgIAAAoAAAAAAAAAAAAuwBUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-28T03:14:33.273Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-28T03:14:33.273Z"
             },
             {
               "$type": "Document",
@@ -117,8 +116,7 @@
               "RelativeToolTip": "financial_management\\record.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-25T09:53:56.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T09:53:56.26Z"
             },
             {
               "$type": "Document",
@@ -130,8 +128,7 @@
               "RelativeToolTip": "financial_management\\spend_record.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-25T09:53:52.243Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T09:53:52.243Z"
             },
             {
               "$type": "Document",
@@ -155,8 +152,7 @@
               "RelativeToolTip": "financial_management\\recordmanager.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-25T11:59:58.055Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T11:59:58.055Z"
             },
             {
               "$type": "Document",
@@ -180,8 +176,7 @@
               "RelativeToolTip": "financial_management\\main.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-25T09:46:32.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T09:46:32.932Z"
             },
             {
               "$type": "Document",
@@ -193,8 +188,7 @@
               "RelativeToolTip": "financial_management\\date.cpp",
               "ViewState": "AgIAADsAAAAAAAAAAAAuwGYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-25T10:15:53.95Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T10:15:53.95Z"
             },
             {
               "$type": "Document",
@@ -218,8 +212,7 @@
               "RelativeToolTip": "financial_management\\income_record.cpp",
               "ViewState": "AgIAACcAAAAAAAAAAAAuwFIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-25T09:54:31.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T09:54:31.57Z"
             },
             {
               "$type": "Document",
@@ -231,8 +224,7 @@
               "RelativeToolTip": "financial_management\\spend_record.cpp",
               "ViewState": "AgIAADYAAAAAAAAAAAAvwEwAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-25T09:45:32.066Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T09:45:32.066Z"
             },
             {
               "$type": "Document",
@@ -244,8 +236,7 @@
               "RelativeToolTip": "financial_management\\record.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-25T09:51:50.263Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T09:51:50.263Z"
             }
           ]
         }
