@@ -14,7 +14,7 @@ class record{
 	public:
 		record();
 		record(date dt,float m,string sb);
-		~record();
+		virtual ~record();
 		date getdate();
 		void setdate(date dt1);
 		float getmoney();

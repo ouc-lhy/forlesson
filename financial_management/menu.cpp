@@ -68,6 +68,18 @@ void inputdaterange(date& start, date& end) {
     }
 }
 
+string inputwho() {
+    string who;
+    while (true) {
+        getline(cin, who);
+        // 去除首尾空白字符后检查是否为空
+        if (who.find_first_not_of(" \t\n\r") != string::npos) {
+            return who; // 返回有效的名称
+        }
+        cout << "Name cannot be empty! Please enter again: ";
+    }
+}
+
 void showmenu() {
     cout << "\n================================================" << endl;
     cout << "          Personal Finance Management System" << endl;
@@ -102,7 +114,7 @@ void menu(int choice, record_manager& manager) {
 
             cout << "please enter fromwho: ";
             string who;
-            getline(cin, who);
+            who=inputwho();
 
             income_record* ird = new income_record(dt, money, it, who);
             manager.addrecord(ird);
@@ -122,7 +134,7 @@ void menu(int choice, record_manager& manager) {
 
             cout << "please enter towho: ";
             string who;
-            getline(cin, who);
+            who = inputwho();
             
             spend_record* srd = new spend_record(dt, money, who, st);
             manager.addrecord(srd);

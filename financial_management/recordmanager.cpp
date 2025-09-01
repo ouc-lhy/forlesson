@@ -13,6 +13,8 @@ T getInput(T minVal = -numeric_limits<T>::max(), T maxVal = numeric_limits<T>::m
 
 date inputdate();
 
+string inputwho();
+
 void record_manager::addrecord(record* rd)
 {
 	records.push_back(rd);
@@ -249,8 +251,8 @@ void record_manager::modifybydate(int y, int m, int d)
 	// 修改金额
 	cout << "Current money: " << selectedRecord->getmoney() << endl;
 	cout << "Enter new money (0 to keep current): ";
-	float newMoney = getInput<float>(0.01);
-	if (newMoney > 0) {
+	float newMoney = getInput<float>(0);
+	if (newMoney > 0.01) {
 		selectedRecord->setmoney(newMoney);
 	}
 
@@ -267,11 +269,13 @@ void record_manager::modifybydate(int y, int m, int d)
 
 	// 修改对方信息
 	cout << "Current To/From: " << selectedRecord->getwho() << endl;
-	cout << "Enter new To/From (press Enter to keep current): ";
-	string newWho;
-	getline(cin, newWho);
-	if (!newWho.empty()) {
+	cout << "Modify To/From? (1=Yes, 0=No): ";
+	int modifyWho = getInput<int>(0, 1);
+	if (modifyWho == 1) {
+		cout << "Enter new To/From: ";
+		string newWho = inputwho();
 		selectedRecord->setwho(newWho);
+		cout << "To/From updated successfully." << endl;
 	}
 
 	// 修改类型（收入或支出的具体类型）

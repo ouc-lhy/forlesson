@@ -11,7 +11,8 @@ record::record()
 record::record(date dt,float m,string sb):dt(dt),money(m),who(sb){
 }
 
-record::~record(){
+record::~record() {
+
 }
 
 date record::getdate(){
