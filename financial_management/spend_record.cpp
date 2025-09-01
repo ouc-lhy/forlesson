@@ -36,7 +36,7 @@ spend_record::spend_record() {
 	otype = food;
 }
 
-spend_record::spend_record(date dt, int money, string sb, spend_category otype) :record(dt, money, sb), otype(otype) {
+spend_record::spend_record(date dt, float money, string sb, spend_category otype) :record(dt, money, sb), otype(otype) {
 }
 
 spend_record::~spend_record() {}
@@ -50,7 +50,7 @@ void spend_record::settype(spend_category type)
 }
 
 ostream& operator<<(ostream& out, spend_record rd) {
-	out << 0 << " " << rd.money << " " << rd.dt << " " << rd.otype<< " " << rd.who << endl;
+	out << 0 << " " << fixed << setprecision(2) << rd.money << " " << rd.dt << " " << rd.otype<< " " << rd.who << endl;
 	return out;
 }
 
@@ -64,7 +64,7 @@ istream& operator>>(istream& in, spend_record& rd)
 
 void spend_record::showrecord() {
 	cout << setw(8) << "spend"
-		<< setw(12) << getmoney() << "гд"
+		<< setw(12) << fixed <<setprecision(2) << getmoney() << "гд"
 		<< setw(9) << getdate()
 		<< setw(14) << otypeToString(gettype())
 		<< setw(9) << "To:"
@@ -74,7 +74,7 @@ void spend_record::showrecord() {
 
 void spend_record::save(ofstream& out)
 {
-	out << 0 << " " << money << " " << dt << " " << otype << " " << who << endl;
+	out << 0 << " " << fixed << setprecision(2) << money << " " << dt << " " << otype << " " << who << endl;
 }
 
 bool spend_record::isIncome() const { return false; }

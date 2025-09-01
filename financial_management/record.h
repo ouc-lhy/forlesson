@@ -3,22 +3,22 @@
 #include <fstream>
 #include<iomanip>
 #pragma once
-const string filename = "1.txt";
+const string filename = "records.txt";
 using namespace std;
 
 class record{
 	protected:
 		date dt;
-		int money;
+		float money;
 		string who;
 	public:
 		record();
-		record(date dt,int m,string sb);
+		record(date dt,float m,string sb);
 		~record();
 		date getdate();
 		void setdate(date dt1);
-		int getmoney();
-		void setmoney(int m);
+		float getmoney();
+		void setmoney(float m);
 		string getwho();
 		void setwho(string sb);
 

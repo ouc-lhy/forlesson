@@ -4,11 +4,11 @@
 record::record()
 {
 	dt=date();
-	money=999;
+	money=9.99;
 	who= "xng";
 }
 
-record::record(date dt,int m,string sb):dt(dt),money(m),who(sb){
+record::record(date dt,float m,string sb):dt(dt),money(m),who(sb){
 }
 
 record::~record(){
@@ -21,11 +21,11 @@ void record::setdate(date dt1){
 	dt=dt1;
 }
 
-int record::getmoney() {
+float record::getmoney() {
 	return money;
 }
 
-void record::setmoney(int m) {
+void record::setmoney(float m) {
 	money=m;
 }
 

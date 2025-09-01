@@ -201,6 +201,7 @@ void record_manager::searchbydate(int y, int m, int d)
 
 void record_manager::modifybydate(int y, int m, int d)
 {
+	sort_records();
 	vector<record*> recordsToModify;
 
 	// 查找匹配的记录
@@ -248,7 +249,7 @@ void record_manager::modifybydate(int y, int m, int d)
 	// 修改金额
 	cout << "Current money: " << selectedRecord->getmoney() << endl;
 	cout << "Enter new money (0 to keep current): ";
-	int newMoney = getInput<int>(0); 
+	float newMoney = getInput<float>(0.01);
 	if (newMoney > 0) {
 		selectedRecord->setmoney(newMoney);
 	}
@@ -302,6 +303,7 @@ void record_manager::modifybydate(int y, int m, int d)
 
 void record_manager::deletebydate(int y, int m, int d)
 {
+	sort_records();
 	vector<record*> recordsToDelete;
 	vector<int> indices; // 保存原始索引
 

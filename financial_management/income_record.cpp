@@ -28,7 +28,7 @@ string itypeToString(income_category itype)
 income_record::income_record() {
 	itype = salary;
 }
-income_record::income_record(date dt, int money, income_category itype, string sb) :record(dt, money, sb), itype(itype) {
+income_record::income_record(date dt, float money, income_category itype, string sb) :record(dt, money, sb), itype(itype) {
 }
 
 income_record::~income_record() {}
@@ -41,7 +41,7 @@ void income_record::settype(income_category type)
 	itype = type;
 }
 ostream& operator<<(ostream& out, income_record rd) {
-	out << 1 << " " << rd.money<< " " << rd.dt << " " << rd.itype << " " << rd.who << endl;
+	out << 1 << " " << std::fixed << std::setprecision(2)<< rd.money<< " " << rd.dt << " " << rd.itype << " " << rd.who << endl;
 	return out;
 }
 
@@ -55,7 +55,7 @@ istream& operator>>(istream& in, income_record& rd)
 
 void income_record::showrecord() {
 	cout << setw(8) << "income"
-		<< setw(12) << getmoney() << "гд"
+		<< setw(12) << fixed << setprecision(2) << getmoney() << "гд"
 		<< setw(9) << getdate()
 		<< setw(14) << itypeToString(gettype())
 		<< setw(9) << "From:"
@@ -65,7 +65,7 @@ void income_record::showrecord() {
 
 void income_record::save(ofstream& out)
 {
-	out << 1 << " " << money << " " << dt << " " << itype << " " << who << endl;
+	out << 1 << " " << fixed << setprecision(2) << money << " " << dt << " " << itype << " " << who << endl;
 
 }
 
