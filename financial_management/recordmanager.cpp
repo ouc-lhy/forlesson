@@ -433,7 +433,7 @@ void record_manager::statisticsbyCategory(date dt1, date dt2)
 	bool hasIncome = false;
 	for (int i = 0; i < 6; i++) {
 		if (incomeAmount[i] > 0) {
-			std::cout << std::setw(15) << std::left << itypeToString((income_category)i)
+			std::cout << std::setw(15) << itypeToString((income_category)i)
 				<< ": " << incomeAmount[i] << "гд (" << incomeCount[i] << " times)\n";
 			hasIncome = true;
 		}
@@ -445,7 +445,7 @@ void record_manager::statisticsbyCategory(date dt1, date dt2)
 	bool hasSpend = false;
 	for (int i = 0; i < 11; i++) {
 		if (spendAmount[i] > 0) {
-			std::cout << std::setw(15) << std::left << otypeToString((spend_category)i)
+			std::cout << std::setw(15) << otypeToString((spend_category)i)
 				<< ": " << spendAmount[i] << "гд (" << spendCount[i] << " times)\n";
 			hasSpend = true;
 		}
