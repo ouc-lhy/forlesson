@@ -429,24 +429,70 @@ void record_manager::statisticsbyCategory(date dt1, date dt2)
 		}
 	}
 
+	// 计算总收入和总支出
+	float totalIncome = 0, totalSpend = 0;
+	for (int i = 0; i < 6; i++) totalIncome += incomeAmount[i];
+	for (int i = 0; i < 11; i++) totalSpend += spendAmount[i];
+
 	std::cout << "\n--- Income Statistics ---\n";
+	if (totalIncome > 0) {
+		// 表头
+		std::cout << std::setw(16) << "Category"
+			<< std::setw(16) << "Amount(￥)"
+			<< std::setw(8) << "Times"
+			<< std::setw(14) << "Percent(%)"
+			<< std::setw(14) << "Avg(￥)"
+			<< std::endl;
+		std::cout << std::string(68, '-') << std::endl; // 分隔线
+	}
+
 	bool hasIncome = false;
 	for (int i = 0; i < 6; i++) {
 		if (incomeAmount[i] > 0) {
-			std::cout << std::setw(15) << itypeToString((income_category)i)
-				<< ": " << incomeAmount[i] << "￥ (" << incomeCount[i] << " times)\n";
+			float percentage = (totalIncome > 0) ? (incomeAmount[i] / totalIncome * 100.0f) : 0.0f;
+			float avgPerTransaction = (incomeCount[i] > 0) ? (incomeAmount[i] / incomeCount[i]) : 0.0f;
+			std::cout << std::setw(16) << itypeToString((income_category)i)
+				<< std::fixed << std::setprecision(2)
+				<< std::setw(16) << incomeAmount[i]
+				<< std::setw(8) << incomeCount[i]
+				<< std::setprecision(3)
+				<< std::setw(14) << percentage
+				<< std::setprecision(2)
+				<< std::setw(14) << avgPerTransaction
+				<< std::endl;
 			hasIncome = true;
 		}
 	}
 	if (!hasIncome) {
 		std::cout << "No income records.\n";
 	}
+
 	std::cout << "\n--- Spend Statistics ---\n";
+	if (totalSpend > 0) {
+		// 表头
+		std::cout << std::setw(16) << "Category"
+			<< std::setw(16) << "Amount(￥)"
+			<< std::setw(8) << "Times"
+			<< std::setw(14) << "Percent(%)"
+			<< std::setw(14) << "Avg(￥)"
+			<< std::endl;
+		std::cout << std::string(68, '-') << std::endl; // 分隔线
+	}
+
 	bool hasSpend = false;
 	for (int i = 0; i < 11; i++) {
 		if (spendAmount[i] > 0) {
-			std::cout << std::setw(15) << otypeToString((spend_category)i)
-				<< ": " << spendAmount[i] << "￥ (" << spendCount[i] << " times)\n";
+			float percentage = (totalSpend > 0) ? (spendAmount[i] / totalSpend * 100.0f) : 0.0f;
+			float avgPerTransaction = (spendCount[i] > 0) ? (spendAmount[i] / spendCount[i]) : 0.0f;
+			std::cout << std::setw(16) << otypeToString((spend_category)i)
+				<< std::fixed << std::setprecision(2)
+				<< std::setw(16) << spendAmount[i]
+				<< std::setw(8) << spendCount[i]
+				<< std::setprecision(3)
+				<< std::setw(14) << percentage
+				<< std::setprecision(2)
+				<< std::setw(14) << avgPerTransaction
+				<< std::endl;
 			hasSpend = true;
 		}
 	}
